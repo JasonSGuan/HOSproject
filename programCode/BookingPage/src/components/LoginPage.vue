@@ -19,7 +19,6 @@
 import Login from './Login/Login.vue'
 import SignUp from './Login/SignUp.vue'
 export default {
-  props: ["userInfo"],
   components: { Login, SignUp },
   name: 'loginPage',
   data () {
@@ -33,18 +32,14 @@ export default {
   },
   methods: {
     initDom () {
-      if(this.isLogin)
-      {
+      if (this.isLogin) {
         this.topIn = (this.$refs.page.clientHeight - this.$refs.login.$el.clientHeight) / 2 + 'px'
-      }
-      else 
-      {
+      } else {
         this.topUp = (this.$refs.page.clientHeight - this.$refs.signUp.$el.clientHeight) / 2 + 'px'
       }
     },
     signUpClick () {
       this.isLogin = false
-
     },
     signInClick () {
       console.info(this.userName)
