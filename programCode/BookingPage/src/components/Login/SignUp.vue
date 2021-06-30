@@ -1,52 +1,52 @@
 <template>
-  <div id="SignUp" ref="page">
+  <div id="SignUp">
     <div class="signUp">
       <div class="userName" ref="divPSignUp">
         <div class="lable" ref="divU">用户名：</div>
         <div class="divInput" :style="{ width: divWidth}">
-          <input type="text" v-model="userName" class="input" :style="{ width: inputWidth}" />
+          <input type="text" v-model="userInfo.userName" class="input" :style="{ width: inputWidth}" />
         </div>
       </div>
       <div class="password">
         <div class="lable">密码：</div>
         <div class="divInput" :style="{ width: divWidth}">
-          <input type="text" v-model="password" class="input" :style="{ width: inputWidth}" />
+          <input type="text" v-model="userInfo.password" class="input" :style="{ width: inputWidth}" />
         </div>
       </div>
       <div class="password">
         <div class="lable">确认密码：</div>
         <div class="divInput" :style="{ width: divWidth}">
-          <input type="text" v-model="password" class="input" :style="{ width: inputWidth}" />
+          <input type="text" v-model="userInfo.EnterPassword" class="input" :style="{ width: inputWidth}" />
         </div>
       </div>
       <div class="password">
         <div class="lable">手机号：</div>
         <div class="divInput" :style="{ width: divWidth}">
-          <input type="text" v-model="password" class="input" :style="{ width: inputWidth}" />
+          <input type="text" v-model="userInfo.phone" class="input" :style="{ width: inputWidth}" />
         </div>
       </div>
       <div class="password">
         <div class="lable">邮箱：</div>
         <div class="divInput" :style="{ width: divWidth}">
-          <input type="text" v-model="password" class="input" :style="{ width: inputWidth}" />
+          <input type="text" v-model="userInfo.email" class="input" :style="{ width: inputWidth}" />
         </div>
       </div>
       <div class="password">
         <div class="lable">姓名：</div>
         <div class="divInput" :style="{ width: divWidth}">
-          <input type="text" v-model="password" class="input" :style="{ width: inputWidth}" />
+          <input type="text" v-model="userInfo.realName" class="input" :style="{ width: inputWidth}" />
         </div>
       </div>
       <div class="password">
         <div class="lable">性别：</div>
         <div class="divInput" :style="{ width: divWidth}">
-          <input type="text" v-model="password" class="input" :style="{ width: inputWidth}" />
+          <input type="text" v-model="userInfo.sex" class="input" :style="{ width: inputWidth}" />
         </div>
       </div>
       <div class="password">
         <div class="lable">年龄：</div>
         <div class="divInput" :style="{ width: divWidth}">
-          <input type="text" v-model="password" class="input" :style="{ width: inputWidth}" />
+          <input type="text" v-model="userInfo.age" class="input" :style="{ width: inputWidth}" />
         </div>
       </div>
     </div>
@@ -55,6 +55,7 @@
 
 <script>
 export default {
+  props: ['userInfo'],
   name: 'SignUp',
   data () {
     return {
@@ -89,8 +90,8 @@ export default {
 }
 .userName{
   width: 90%;
-  top: -40%;
   margin: auto;
+  margin-top: 15px;
 }
 .password{
   width: 90%;

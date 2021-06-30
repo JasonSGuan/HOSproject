@@ -1,15 +1,15 @@
 <template>
     <div id="loginPage" class="loginPage" ref="page">
-      <Login class="login" ref="login" :style="{ 'margin-top': topIn}" v-if="isLogin">
+      <Login class="login" ref="login" v-bind:userInfo="loginUserInfo" :style="{ 'margin-top': topIn}" v-if="isLogin">
       </Login>
-      <SignUp class="signUp" ref="signUp" :style="{ 'margin-top': topUp}" v-else>
+      <SignUp class="signUp" ref="signUp" v-bind:userInfo="signUpUserInfo" :style="{ 'margin-top': topUp}" v-else>
       </SignUp>
       <div>
         <div class="inline margin">
-          <button class="button" @click="signInClick">登   录</button>
+          <button class="button" @click="signInClick">{{reback ? '提   交' : '登   录'}}</button>
         </div>
         <div class="inline margin">
-          <button class="button" @click="signUpClick" >注   册</button>
+          <button class="button" @click="signUpClick" >{{reback ? '返   回' : '注   册'}}</button>
         </div>
       </div>
     </div>
@@ -23,10 +23,31 @@ export default {
   name: 'loginPage',
   data () {
     return {
-      userName: '',
-      password: '',
+      loginUserInfo: [ {
+        id: 1,
+        label: '用户名',
+        value: '',
+        content: ''
+      }, {
+        id: 2,
+        label: '密码',
+        value: '',
+        content: '忘记密码'
+      }
+      ],
+      signUpUserInfo: {
+        userName: '',
+        password: '',
+        EnterPassword: '',
+        email: '',
+        phone: '',
+        realName: '',
+        sex: '',
+        age: ''
+      },
       topIn: '0px',
       topUp: '0px',
+      reback: false,
       isLogin: true
     }
   },
@@ -39,15 +60,26 @@ export default {
       }
     },
     signUpClick () {
-      this.isLogin = false
+      if (!this.reback) {
+        this.isLogin = false
+        this.reback = true
+      } else {
+        this.isLogin = true
+        this.reback = false
+      }
     },
     signInClick () {
-      console.info(this.userName)
-      console.info(this.password)
-    },
-    forgetPWDClick () {
-      console.info(this.userName)
-      console.info(this.password)
+      console.info(this.loginUserInfo[0].value)
+      console.info(this.loginUserInfo[1].value)
+      this.$axios({
+        method:'post',
+        url:'',
+        data:'',
+      }).then(function(res){
+        console.info(res)
+      }).catch(function(err){
+        console.info(err)
+      })
     }
   },
   mounted () {
