@@ -4,36 +4,28 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using BookingApi.IRepository;
+using BookingApi.Repository;
+using BookingApi.Models;
+using BookingApi.Filters;
 
 namespace BookingApi.Controllers
 {
+    [RoutePrefix("api/Customer")]
+    [LogAction]
     public class LoginController : ApiController
     {
-        // GET api/<controller>
-        public IEnumerable<string> Get()
+        public LoginIRepository Customer { get; private set; }
+        public LoginController(LoginRepository customer)
         {
-            return new string[] { "value1", "value2" };
+            this.Customer = customer;
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
+        [Route("Login")]
+        [HttpPost]
+        public ApiResultModel Login(UserInfoModel user)
         {
-            return "value";
-        }
-
-        // POST api/<controller>
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
+            return Customer.Login(user);
         }
     }
 }
