@@ -1,0 +1,9 @@
+E:\github\HOSProject\HOSproject\programCode\BookingApi\DEserectHelper\bin\Debug\DEserectHelper.exe.config
+E:\github\HOSProject\HOSproject\programCode\BookingApi\DEserectHelper\bin\Debug\DEserectHelper.exe
+E:\github\HOSProject\HOSproject\programCode\BookingApi\DEserectHelper\bin\Debug\DEserectHelper.pdb
+E:\github\HOSProject\HOSproject\programCode\BookingApi\DEserectHelper\obj\Debug\DEserectHelper.From1.resources
+E:\github\HOSProject\HOSproject\programCode\BookingApi\DEserectHelper\obj\Debug\DEserectHelper.Properties.Resources.resources
+E:\github\HOSProject\HOSproject\programCode\BookingApi\DEserectHelper\obj\Debug\DEserectHelper.csproj.GenerateResource.cache
+E:\github\HOSProject\HOSproject\programCode\BookingApi\DEserectHelper\obj\Debug\DEserectHelper.csproj.CoreCompileInputs.cache
+E:\github\HOSProject\HOSproject\programCode\BookingApi\DEserectHelper\obj\Debug\DEserectHelper.exe
+E:\github\HOSProject\HOSproject\programCode\BookingApi\DEserectHelper\obj\Debug\DEserectHelper.pdb

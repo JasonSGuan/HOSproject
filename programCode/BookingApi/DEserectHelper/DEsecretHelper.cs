@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 
-namespace BookingApi.Tools
+namespace DEserectHelper
 {
     public class DEsecretHelper
     {

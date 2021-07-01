@@ -1,21 +1,8 @@
 <template>
   <div id="Login">
     <div class="login">
-      <InputModel v-for="user in userInfo" v-bind:key="user.id" v-bind:object="user">
+      <InputModel v-for="user in userInfoList" v-bind:key="user.id" v-bind:object="user">
       </InputModel>
-      <!-- <div class="userName" ref="divPLogin">
-        <div class="lable" ref="divU">用户名：</div>
-        <div class="divInput" :style="{ width: divWidth}">
-          <input type="text" v-model="userInfo.userName" class="input" :style="{ width: inputWidth}" />
-        </div>
-      </div>
-      <div class="password">
-        <div class="lable">密码：</div>
-        <div class="divInput" :style="{ width: divWidth}">
-          <input type="text" v-model="userInfo.password" class="input" :style="{ width: inputWidth}" />
-          <a @click="forgetPWDClick" class="a">忘记密码</a>
-        </div>
-      </div> -->
     </div>
   </div>
 </template>
@@ -28,11 +15,29 @@ export default {
   name: 'Login',
   data () {
     return {
+      userInfoList: [{
+        id: 1,
+        label: '用户名',
+        value: '',
+        content: ''
+      }, {
+        id: 2,
+        label: '密码',
+        value: '',
+        content: '忘记密码'
+      }],
       inputWidth: '0px',
       divWidth: '0px'
     }
   },
   methods: {
+    initDom () {
+      this.userInfoList[0].value = this.userInfo.userName
+      this.userInfoList[1].value = this.userInfo.password
+    }
+  },
+  mounted () {
+    this.initDom()
   }
 }
 </script>

@@ -24,18 +24,10 @@ export default {
   name: 'loginPage',
   data () {
     return {
-      loginUserInfo: [ {
-        id: 1,
-        label: '用户名',
-        value: '',
-        content: ''
-      }, {
-        id: 2,
-        label: '密码',
-        value: '',
-        content: '忘记密码'
-      }
-      ],
+      loginUserInfo: {
+        userName: '1',
+        password: '2'
+      },
       signUpUserInfo: {
         userName: '',
         password: '',
@@ -70,12 +62,13 @@ export default {
       }
     },
     signInClick () {
-      console.info(this.loginUserInfo[0].value)
-      console.info(this.loginUserInfo[1].value)
+      console.info(this.loginUserInfo.userName)
+      console.info(this.loginUserInfo.password)
       axios({
         method: 'post',
         url: 'http://www.lightor.vip/BookingApi/api/Login/Login',
-        data: ''
+        data: { 'userName': this.loginUserInfo.userName, 'password': this.loginUserInfo.password },
+        headers: {'Content-Type': 'application/json'}
       }).then(function (res) {
         console.info(res)
       }).catch(function (err) {
