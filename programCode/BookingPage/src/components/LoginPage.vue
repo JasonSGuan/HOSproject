@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Login from './Login/Login.vue'
 import SignUp from './Login/SignUp.vue'
 export default {
@@ -71,13 +72,13 @@ export default {
     signInClick () {
       console.info(this.loginUserInfo[0].value)
       console.info(this.loginUserInfo[1].value)
-      this.$axios({
-        method:'post',
-        url:'',
-        data:'',
-      }).then(function(res){
+      axios({
+        method: 'post',
+        url: 'http://www.lightor.vip/BookingApi/api/Login/Login',
+        data: ''
+      }).then(function (res) {
         console.info(res)
-      }).catch(function(err){
+      }).catch(function (err) {
         console.info(err)
       })
     }

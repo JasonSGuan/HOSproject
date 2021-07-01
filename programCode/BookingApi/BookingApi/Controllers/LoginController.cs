@@ -11,7 +11,7 @@ using BookingApi.Filters;
 
 namespace BookingApi.Controllers
 {
-    [RoutePrefix("api/Customer")]
+    [RoutePrefix("api/Login")]
     [LogAction]
     public class LoginController : ApiController
     {
@@ -21,6 +21,18 @@ namespace BookingApi.Controllers
             this.Customer = customer;
         }
 
+        [Route("test")]
+        [HttpGet]
+        public string test()
+        {
+            return "1";
+        }
+
+        /// <summary>
+        /// 登陆接口
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         [Route("Login")]
         [HttpPost]
         public ApiResultModel Login(UserInfoModel user)

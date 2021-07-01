@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookingApi.Filters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -13,6 +14,8 @@ namespace BookingApi
 
             // Web API 路由
             config.MapHttpAttributeRoutes();
+
+            config.Filters.Add(new ApiExceptionFilterAttribute());
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

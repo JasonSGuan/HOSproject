@@ -1,0 +1,36 @@
+2021-07-01 14:15:48.8328|INFO|BookingApi.Common.AppLog|JSON
+Method : GET
+URL : http://localhost:44359/api/Login/test
+请求
+Action Parameters : {"messageFormat":"JSON","messageArguments":[""]}
+
+2021-07-01 14:15:48.9495|INFO|BookingApi.Common.AppLog|JSON
+Method : GET
+URL : http://localhost:44359/api/Login/test
+返回
+Action Parameters : {"messageFormat":"JSON","messageArguments":["\"1\""]}
+
+2021-07-01 14:54:23.5091|INFO|BookingApi.Common.AppLog|JSON
+Method : GET
+URL : http://localhost:44359/api/Login/test
+请求
+Action Parameters : {"messageFormat":"JSON","messageArguments":[""]}
+
+2021-07-01 14:54:23.6068|INFO|BookingApi.Common.AppLog|JSON
+Method : GET
+URL : http://localhost:44359/api/Login/test
+返回
+Action Parameters : {"messageFormat":"JSON","messageArguments":["\"1\""]}
+
+2021-07-01 16:08:09.6402|INFO|BookingApi.Common.AppLog|JSON
+Method : GET
+URL : http://localhost:44359/api/Login/test
+请求
+Action Parameters : {"messageFormat":"JSON","messageArguments":[""]}
+
+2021-07-01 16:08:09.6991|INFO|BookingApi.Common.AppLog|JSON
+Method : GET
+URL : http://localhost:44359/api/Login/test
+返回
+Action Parameters : {"messageFormat":"JSON","messageArguments":["\"1\""]}
+
