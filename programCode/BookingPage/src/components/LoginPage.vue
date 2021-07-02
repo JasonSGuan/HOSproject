@@ -1,6 +1,6 @@
 <template>
     <div id="loginPage" class="loginPage" ref="page">
-      <Login class="login" ref="login" v-bind:userInfo="loginUserInfo" :style="{ 'margin-top': topIn}" v-if="isLogin">
+      <Login class="login" ref="login" v-bind:userInfo="loginUserInfo" :style="{ 'margin-top': topIn}" v-if="isLogin" v-on:forgetPassword="changePassword">
       </Login>
       <SignUp class="signUp" ref="signUp" v-bind:userInfo="signUpUserInfo" :style="{ 'margin-top': topUp}" v-else>
       </SignUp>
@@ -25,13 +25,13 @@ export default {
   data () {
     return {
       loginUserInfo: {
-        userName: '1',
-        password: '2'
+        userName: '',
+        password: ''
       },
       signUpUserInfo: {
         userName: '',
         password: '',
-        EnterPassword: '',
+        enterPassword: '',
         email: '',
         phone: '',
         realName: '',
@@ -52,6 +52,7 @@ export default {
         this.topUp = (this.$refs.page.clientHeight - this.$refs.signUp.$el.clientHeight) / 2 + 'px'
       }
     },
+    // 注册返回按钮点击事件
     signUpClick () {
       if (!this.reback) {
         this.isLogin = false
@@ -61,19 +62,34 @@ export default {
         this.reback = false
       }
     },
+    // 登陆提交按钮点击事件
     signInClick () {
-      console.info(this.loginUserInfo.userName)
-      console.info(this.loginUserInfo.password)
-      axios({
-        method: 'post',
-        url: 'http://www.lightor.vip/BookingApi/api/Login/Login',
-        data: { 'userName': this.loginUserInfo.userName, 'password': this.loginUserInfo.password },
-        headers: {'Content-Type': 'application/json'}
-      }).then(function (res) {
-        console.info(res)
-      }).catch(function (err) {
-        console.info(err)
-      })
+      if (!this.reback) {
+        axios({
+          method: 'post',
+          url: 'http://www.lightor.vip/BookingApi/api/Login/Login',
+          data: { 'userName': this.loginUserInfo.userName, 'password': this.loginUserInfo.password },
+          headers: {'Content-Type': 'application/json'},
+          origin: '*'
+        }).then(function (res) {
+          console.info(res)
+        }).catch(function (err) {
+          console.info(err)
+        })
+      } else {
+        console.info(this.signUpUserInfo.userName)
+        console.info(this.signUpUserInfo.password)
+        console.info(this.signUpUserInfo.enterPassword)
+        console.info(this.signUpUserInfo.phone)
+        console.info(this.signUpUserInfo.email)
+        console.info(this.signUpUserInfo.realName)
+        console.info(this.signUpUserInfo.sex)
+        console.info(this.signUpUserInfo.age)
+      }
+    },
+    // 忘记密码点击事件
+    changePassword () {
+      console.info(this.topIn)
     }
   },
   mounted () {

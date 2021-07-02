@@ -19,7 +19,7 @@ namespace BookingApi.Filters
             // 记录错误日志
             GlobalConfiguration.Configuration.Services.Replace(typeof(ITraceWriter), new AppLog());
             var trace = GlobalConfiguration.Configuration.Services.GetTraceWriter();
-            trace.Error(actionExecutedContext.Request, "Controller : " + actionExecutedContext.ActionContext.ControllerContext.ControllerDescriptor.ControllerType.FullName + Environment.NewLine + "Action : " + actionExecutedContext.ActionContext.ActionDescriptor.ActionName, actionExecutedContext.Exception);
+            trace.Info(actionExecutedContext.Request, "Controller : " + actionExecutedContext.ActionContext.ControllerContext.ControllerDescriptor.ControllerType.FullName + Environment.NewLine + "Action : " + actionExecutedContext.ActionContext.ActionDescriptor.ActionName, actionExecutedContext.Exception);
 
             base.OnException(actionExecutedContext);
 

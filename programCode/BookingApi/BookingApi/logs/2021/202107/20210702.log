@@ -1,0 +1,8 @@
+2021-07-02 14:43:26.7188|INFO|BookingApi.Common.AppLog|JSON
+Method : POST
+URL : http://localhost:44359/api/Login/Login
+请求
+Action Parameters : {"messageFormat":"JSON","messageArguments":["{\"userName\": \"1\", \"password\": \"2\"}"]}
+
+2021-07-02 14:43:46.7503|INFO|BookingApi.Repository.LoginRepository|用户名：1
+2021-07-02 14:43:47.1831|INFO|BookingApi.Repository.LoginRepository|密码：2

@@ -27,9 +27,6 @@ namespace BookingApi.Repository
         {
             string userName = user.userName;
             string password = user.password;
-            // 记录传入用户名和密码
-            log.Info("用户名：" + userName);
-            log.Info("密码：" + password);
             string strSql = "";
             // 根据用户名和密码查询用户表是否有对应数据
             strSql = $@"SELECT COUNT(1) FROM dbo.users WHERE userName = @userName AND password = @password";
@@ -62,6 +59,24 @@ namespace BookingApi.Repository
                 result.Message = "用户名或密码错误";
             }
             return result;
+        }
+
+        /// <summary>
+        /// 注册接口
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public ApiResultModel SignUp(UserInfoModel user)
+        {
+            string userName = user.userName;
+            string password = user.password;
+            string email = user.email;
+            string phone = user.phone;
+            string sex = user.sex;
+            string age = user.age;
+            string realName = user.realName;
+            string strSql = "";
+            return new ApiResultModel();
         }
     }
 }

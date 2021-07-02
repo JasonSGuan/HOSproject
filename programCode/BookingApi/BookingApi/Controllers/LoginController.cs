@@ -39,5 +39,17 @@ namespace BookingApi.Controllers
         {
             return Customer.Login(user);
         }
+
+        /// <summary>
+        /// 注册接口
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        [Route("SignUp")]
+        [HttpPost]
+        public ApiResultModel SignUp(UserInfoModel user)
+        {
+            return Customer.SignUp(user);
+        }
     }
 }

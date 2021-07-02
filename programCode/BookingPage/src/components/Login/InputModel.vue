@@ -3,8 +3,13 @@
     <div class="divModel" ref="divPLogin">
       <div class="label" ref="divU">{{object.label}}:</div>
       <div class="divInput" :style="{ width: divWidth}">
-        <input type="text" v-model="object.value" class="input" :style="{ width: inputWidth}" />
-        <div class="divContent">{{object.content}}</div>
+        <input type="text" v-model="object.value" class="input" :style="{ width: inputWidth}" v-on:keyup="inputResponse" v-if="inputType" />
+        <select v-model="object.value" v-else-if="isSelect" class="input" :style="{ width: inputWidth}">
+          <option label="男" value="女"></option>
+          <option label="女" value="男"></option>
+        </select>
+        <input type="password" v-model="object.value" class="input" :style="{ width: inputWidth}" v-on:keyup="inputResponse" v-else />
+        <div class="divContent" v-on:click="divResponse">{{object.content}}</div>
       </div>
     </div>
   </div>
@@ -17,13 +22,33 @@ export default {
   data () {
     return {
       inputWidth: '0px',
-      divWidth: '0px'
+      divWidth: '0px',
+      inputType: true,
+      isSelect: false
     }
   },
   methods: {
     initDom () {
+      if (this.object.label === '密码' || this.object.label === '确认密码') {
+        this.inputType = false
+        this.isSelect = false
+      } else if (this.object.label === '性别') {
+        this.isSelect = true
+        this.inputType = false
+      } else {
+        this.isSelect = false
+        this.inputType = true
+      }
       this.divWidth = (this.$refs.divPLogin.clientWidth - this.$refs.divU.clientWidth - 8) + 'px'
       this.inputWidth = (this.$refs.divPLogin.clientWidth - this.$refs.divU.clientWidth - 8 - 60) + 'px'
+    },
+    divResponse () {
+      if (this.object.vonType === 'divClick') {
+        this.$emit('divResponse')
+      }
+    },
+    inputResponse () {
+      this.$emit('inputResponse', this.object.id, this.object.value)
     }
   },
   mounted () {

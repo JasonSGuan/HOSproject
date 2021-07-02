@@ -15,5 +15,12 @@ namespace BookingApi.IRepository
         /// <param name="user">登录信息</param>
         /// <returns></returns>
         ApiResultModel Login(UserInfoModel user);
+
+        /// <summary>
+        /// 注册接口
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        ApiResultModel SignUp(UserInfoModel user);
     }
 }

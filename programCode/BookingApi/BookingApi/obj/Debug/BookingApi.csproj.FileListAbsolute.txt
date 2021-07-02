@@ -65,7 +65,6 @@ G:\git\programCode\BookingApi\BookingApi\obj\Debug\BookingApi.csproj.CoreCompile
 G:\git\programCode\BookingApi\BookingApi\obj\Debug\BookingApi.csproj.CopyComplete
 G:\git\programCode\BookingApi\BookingApi\obj\Debug\BookingApi.dll
 G:\git\programCode\BookingApi\BookingApi\obj\Debug\BookingApi.pdb
-G:\git\programCode\BookingApi\BookingApi\obj\Debug\BookingApi.csproj.AssemblyReference.cache
 G:\git\programCode\BookingApi\BookingApi\bin\System.Web.Helpers.dll
 G:\git\programCode\BookingApi\BookingApi\bin\System.Web.WebPages.Deployment.dll
 G:\git\programCode\BookingApi\BookingApi\bin\System.Web.WebPages.dll
@@ -145,3 +144,7 @@ E:\github\HOSProject\HOSproject\programCode\BookingApi\BookingApi\obj\Debug\Book
 E:\github\HOSProject\HOSproject\programCode\BookingApi\BookingApi\obj\Debug\BookingApi.csproj.CopyComplete
 E:\github\HOSProject\HOSproject\programCode\BookingApi\BookingApi\obj\Debug\BookingApi.dll
 E:\github\HOSProject\HOSproject\programCode\BookingApi\BookingApi\obj\Debug\BookingApi.pdb
+G:\git\programCode\BookingApi\BookingApi\bin\System.Web.Cors.dll
+G:\git\programCode\BookingApi\BookingApi\bin\System.Web.Http.Cors.dll
+G:\git\programCode\BookingApi\BookingApi\bin\System.Web.Http.Cors.xml
+G:\git\programCode\BookingApi\BookingApi\obj\Debug\BookingApi.csproj.AssemblyReference.cache

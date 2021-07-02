@@ -1,79 +1,97 @@
 <template>
   <div id="SignUp">
     <div class="signUp">
-      <div class="userName" ref="divPSignUp">
-        <div class="lable" ref="divU">用户名：</div>
-        <div class="divInput" :style="{ width: divWidth}">
-          <input type="text" v-model="userInfo.userName" class="input" :style="{ width: inputWidth}" />
-        </div>
-      </div>
-      <div class="password">
-        <div class="lable">密码：</div>
-        <div class="divInput" :style="{ width: divWidth}">
-          <input type="text" v-model="userInfo.password" class="input" :style="{ width: inputWidth}" />
-        </div>
-      </div>
-      <div class="password">
-        <div class="lable">确认密码：</div>
-        <div class="divInput" :style="{ width: divWidth}">
-          <input type="text" v-model="userInfo.EnterPassword" class="input" :style="{ width: inputWidth}" />
-        </div>
-      </div>
-      <div class="password">
-        <div class="lable">手机号：</div>
-        <div class="divInput" :style="{ width: divWidth}">
-          <input type="text" v-model="userInfo.phone" class="input" :style="{ width: inputWidth}" />
-        </div>
-      </div>
-      <div class="password">
-        <div class="lable">邮箱：</div>
-        <div class="divInput" :style="{ width: divWidth}">
-          <input type="text" v-model="userInfo.email" class="input" :style="{ width: inputWidth}" />
-        </div>
-      </div>
-      <div class="password">
-        <div class="lable">姓名：</div>
-        <div class="divInput" :style="{ width: divWidth}">
-          <input type="text" v-model="userInfo.realName" class="input" :style="{ width: inputWidth}" />
-        </div>
-      </div>
-      <div class="password">
-        <div class="lable">性别：</div>
-        <div class="divInput" :style="{ width: divWidth}">
-          <input type="text" v-model="userInfo.sex" class="input" :style="{ width: inputWidth}" />
-        </div>
-      </div>
-      <div class="password">
-        <div class="lable">年龄：</div>
-        <div class="divInput" :style="{ width: divWidth}">
-          <input type="text" v-model="userInfo.age" class="input" :style="{ width: inputWidth}" />
-        </div>
-      </div>
+      <InputModel v-for="user in userInfoList" v-bind:key="user.id" v-bind:object="user" v-on:inputResponse="inputValue">
+      </InputModel>
     </div>
   </div>
 </template>
 
 <script>
+import InputModel from './InputModel.vue'
 export default {
   props: ['userInfo'],
+  components: { InputModel },
   name: 'SignUp',
   data () {
     return {
-      userName: '',
-      password: '',
+      userInfoList: [{
+        id: 1,
+        label: '用户名',
+        value: '',
+        content: '',
+        vonType: ''
+      }, {
+        id: 2,
+        label: '密码',
+        value: '',
+        content: '',
+        vonType: ''
+      }, {
+        id: 3,
+        label: '确认密码',
+        value: '',
+        content: '',
+        vonType: ''
+      }, {
+        id: 4,
+        label: '手机号',
+        value: '',
+        content: '',
+        vonType: ''
+      }, {
+        id: 5,
+        label: '邮箱',
+        value: '',
+        content: '',
+        vonType: ''
+      }, {
+        id: 6,
+        label: '姓名',
+        value: '',
+        content: '',
+        vonType: ''
+      }, {
+        id: 7,
+        label: '性别',
+        value: '',
+        content: '',
+        vonType: ''
+      }, {
+        id: 8,
+        label: '年龄',
+        value: '',
+        content: '',
+        vonType: ''
+      }],
       inputWidth: '0px',
-      divWidth: '0px',
-      topUp: '0px'
+      divWidth: '0px'
     }
   },
   methods: {
     initDom () {
       this.divWidth = (this.$refs.divPSignUp.clientWidth - this.$refs.divU.clientWidth - 8) + 'px'
       this.inputWidth = (this.$refs.divPSignUp.clientWidth - this.$refs.divU.clientWidth - 8 - 60) + 'px'
+    },
+    inputValue (id, value) {
+      if (id === 1) {
+        this.userInfo.userName = value
+      } else if (id === 2) {
+        this.userInfo.password = value
+      } else if (id === 3) {
+        this.userInfo.enterPassword = value
+      } else if (id === 4) {
+        this.userInfo.phone = value
+      } else if (id === 5) {
+        this.userInfo.email = value
+      } else if (id === 6) {
+        this.userInfo.realName = value
+      } else if (id === 7) {
+        this.userInfo.sex = value
+      } else {
+        this.userInfo.age = value
+      }
     }
-  },
-  mounted () {
-    this.initDom()
   },
   updated () {
     this.initDom()
@@ -87,37 +105,5 @@ export default {
   width: 100%;
   text-align: center;
   margin: auto;
-}
-.userName{
-  width: 90%;
-  margin: auto;
-  margin-top: 15px;
-}
-.password{
-  width: 90%;
-  margin: auto;
-  margin-top: 15px;
-}
-.lable{
-  display: inline-block;
-  width: 60px;
-  text-align: right;
-  font-size: 12px
-}
-.divInput{
-  display: inline-block;
-  text-align: left;
-}
-.input{
-  border: 0;
-  text-align: right;
-  height: 30px;
-  opacity: 0.75;
-  background-color: rgb(225,255,230);
-  padding: 0px;
-}
-.a{
-  font-size: 12px;
-  width: 20px;
 }
 </style>

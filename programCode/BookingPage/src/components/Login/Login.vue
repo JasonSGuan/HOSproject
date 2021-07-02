@@ -1,7 +1,7 @@
 <template>
   <div id="Login">
     <div class="login">
-      <InputModel v-for="user in userInfoList" v-bind:key="user.id" v-bind:object="user">
+      <InputModel v-for="user in userInfoList" v-bind:key="user.id" v-bind:object="user" v-on:divResponse="changePassword" v-on:inputResponse="inputValue">
       </InputModel>
     </div>
   </div>
@@ -19,12 +19,14 @@ export default {
         id: 1,
         label: '用户名',
         value: '',
-        content: ''
+        content: '',
+        vonType: ''
       }, {
         id: 2,
         label: '密码',
         value: '',
-        content: '忘记密码'
+        content: '忘记密码',
+        vonType: 'divClick'
       }],
       inputWidth: '0px',
       divWidth: '0px'
@@ -34,6 +36,16 @@ export default {
     initDom () {
       this.userInfoList[0].value = this.userInfo.userName
       this.userInfoList[1].value = this.userInfo.password
+    },
+    changePassword () {
+      this.$emit('forgetPassword')
+    },
+    inputValue (id, value) {
+      if (id === 1) {
+        this.userInfo.userName = value
+      } else {
+        this.userInfo.password = value
+      }
     }
   },
   mounted () {

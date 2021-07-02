@@ -47,8 +47,8 @@ namespace BookingApi.Tools
             }
             catch (Exception ex)
             {
-                log.Error("异常语句：" + strSql);
-                log.Error("执行sql异常:" + ex.Message);
+                log.Info("异常语句：" + strSql);
+                log.Info("执行sql异常:" + ex.Message);
                 return new DataTable();
             }
         }
@@ -83,8 +83,8 @@ namespace BookingApi.Tools
             }
             catch (Exception ex)
             {
-                log.Error("异常语句：" + strSql);
-                log.Error("执行sql异常:" + ex.Message);
+                log.Info("异常语句：" + strSql);
+                log.Info("执行sql异常:" + ex.Message);
                 return -1;
             }
         }
@@ -129,7 +129,7 @@ namespace BookingApi.Tools
             }
             catch (Exception ex)
             {
-                log.Error("批量导入异常:" + ex.Message);
+                log.Info("批量导入异常:" + ex.Message);
             }
         }
 
