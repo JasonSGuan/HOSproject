@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <div class="background">
+    <div class="background" :style="{ top: topBg}">
       <img :src="imgUrl" class="bgImg" />
     </div>
-    <router-view class="other" />
+    <router-view class="other" v-on:scroll="fixedBgImg"/>
   </div>
 </template>
 
@@ -11,7 +11,15 @@
 export default {
   name: 'App',
   data () {
-    return {imgUrl: require('./assets/卡通风.png')}
+    return {
+      imgUrl: require('./assets/卡通风.png'),
+      topBg: '0px'
+    }
+  },
+  methods: {
+    fixedBgImg (value) {
+      this.topBg = value + 'px'
+    }
   }
 }
 </script>
@@ -27,6 +35,7 @@ export default {
 .bgImg{
   width: 100%;
   height: 100%;
+  background-attachment: fixed;
 }
 .background{
   z-index: -1;

@@ -15,10 +15,10 @@ namespace BookingApi.Controllers
     [LogAction]
     public class LoginController : ApiController
     {
-        public LoginIRepository Customer { get; private set; }
-        public LoginController(LoginRepository customer)
+        public LoginIRepository login { get; private set; }
+        public LoginController(LoginRepository login)
         {
-            this.Customer = customer;
+            this.login = login;
         }
 
         [Route("test")]
@@ -37,7 +37,7 @@ namespace BookingApi.Controllers
         [HttpPost]
         public ApiResultModel Login(UserInfoModel user)
         {
-            return Customer.Login(user);
+            return login.Login(user);
         }
 
         /// <summary>
@@ -49,7 +49,19 @@ namespace BookingApi.Controllers
         [HttpPost]
         public ApiResultModel SignUp(UserInfoModel user)
         {
-            return Customer.SignUp(user);
+            return login.SignUp(user);
+        }
+
+        /// <summary>
+        /// 验证用户名是否存在
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        [Route("Repeated")]
+        [HttpPost]
+        public ApiResultModel IsRepeatedUserName(UserInfoModel user)
+        {
+            return login.IsRepeatedUserName(user);
         }
     }
 }

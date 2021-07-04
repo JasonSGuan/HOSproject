@@ -35,14 +35,19 @@ namespace BookingApi.Tools
             SqlDataAdapter adapt = new SqlDataAdapter();
             try
             {
+                connection.Open();
                 cmd.CommandText = strSql;
                 foreach (SqlParameter parm in sqlParameters)
+                {
                     cmd.Parameters.Add(parm);
-                connection.Open();
+                }
                 cmd.Connection = connection;
                 adapt.SelectCommand = cmd;
                 DataSet ds = new DataSet();
                 adapt.Fill(ds);
+                cmd.Dispose();
+                adapt.Dispose();
+                connection.Close();
                 return ds.Tables[0];
             }
             catch (Exception ex)
@@ -78,8 +83,14 @@ namespace BookingApi.Tools
                 connection.Open();
                 cmd.CommandText = strSql;
                 foreach (SqlParameter param in sqlParameters)
+                {
                     cmd.Parameters.Add(param);
-                return cmd.ExecuteNonQuery();
+                }
+                cmd.Connection = connection;
+                int x = cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                connection.Close();
+                return x;
             }
             catch (Exception ex)
             {

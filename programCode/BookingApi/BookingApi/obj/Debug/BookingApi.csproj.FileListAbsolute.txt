@@ -148,3 +148,6 @@ G:\git\programCode\BookingApi\BookingApi\bin\System.Web.Cors.dll
 G:\git\programCode\BookingApi\BookingApi\bin\System.Web.Http.Cors.dll
 G:\git\programCode\BookingApi\BookingApi\bin\System.Web.Http.Cors.xml
 G:\git\programCode\BookingApi\BookingApi\obj\Debug\BookingApi.csproj.AssemblyReference.cache
+E:\github\HOSProject\HOSproject\programCode\BookingApi\BookingApi\bin\System.Web.Cors.dll
+E:\github\HOSProject\HOSproject\programCode\BookingApi\BookingApi\bin\System.Web.Http.Cors.dll
+E:\github\HOSProject\HOSproject\programCode\BookingApi\BookingApi\bin\System.Web.Http.Cors.xml

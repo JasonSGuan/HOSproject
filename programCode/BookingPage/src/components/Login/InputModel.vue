@@ -4,13 +4,13 @@
       <div class="label" ref="divU">{{object.label}}:</div>
       <div class="divInput" :style="{ width: divWidth}">
         <input type="text" v-model="object.value" class="input" :style="{ width: inputWidth}" v-on:keyup="inputResponse" v-if="inputType" />
-        <select v-model="object.value" v-else-if="isSelect" class="input" :style="{ width: inputWidth}">
-          <option label="男" value="女"></option>
-          <option label="女" value="男"></option>
+        <select v-model="object.value" v-else-if="isSelect" class="input" :style="{ width: inputWidth}" v-on:change="inputResponse">
+          <option label="男" value="男"></option>
+          <option label="女" value="女"></option>
         </select>
         <input type="password" v-model="object.value" class="input" :style="{ width: inputWidth}" v-on:keyup="inputResponse" v-else />
-        <div class="divContent" v-on:click="divResponse">{{object.content}}</div>
       </div>
+      <div class="divContent" :style="{ width: inputWidth}" v-on:click="divResponse">{{object.content}}</div>
     </div>
   </div>
 </template>
@@ -40,7 +40,7 @@ export default {
         this.inputType = true
       }
       this.divWidth = (this.$refs.divPLogin.clientWidth - this.$refs.divU.clientWidth - 8) + 'px'
-      this.inputWidth = (this.$refs.divPLogin.clientWidth - this.$refs.divU.clientWidth - 8 - 60) + 'px'
+      this.inputWidth = (this.$refs.divPLogin.clientWidth - this.$refs.divU.clientWidth - 8 - 30) + 'px'
     },
     divResponse () {
       if (this.object.vonType === 'divClick') {
@@ -73,7 +73,8 @@ export default {
   display: inline-block;
   width: 60px;
   text-align: right;
-  font-size: 12px
+  font-size: 12px;
+  margin: auto;
 }
 .divInput{
   display: inline-block;
@@ -89,7 +90,8 @@ export default {
 }
 .divContent{
   font-size: 12px;
-  width: 50px;
-  display: inline-block;
+  margin-left: 68px;
+  margin-top: 5px;
+  text-align: left;
 }
 </style>

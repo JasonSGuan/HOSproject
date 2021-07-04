@@ -22,5 +22,12 @@ namespace BookingApi.IRepository
         /// <param name="user"></param>
         /// <returns></returns>
         ApiResultModel SignUp(UserInfoModel user);
+
+        /// <summary>
+        /// 判断用户名是否重复
+        /// </summary>
+        /// <param name="useer"></param>
+        /// <returns></returns>
+        ApiResultModel IsRepeatedUserName(UserInfoModel user);
     }
 }

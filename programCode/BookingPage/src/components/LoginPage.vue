@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import Login from './Login/Login.vue'
 import SignUp from './Login/SignUp.vue'
 export default {
@@ -65,35 +64,70 @@ export default {
     // 登陆提交按钮点击事件
     signInClick () {
       if (!this.reback) {
-        axios({
+        this.request({
           method: 'post',
-          url: 'http://www.lightor.vip/BookingApi/api/Login/Login',
-          data: { 'userName': this.loginUserInfo.userName, 'password': this.loginUserInfo.password },
-          headers: {'Content-Type': 'application/json'},
-          origin: '*'
+          url: '/Login/Login',
+          data: { 'userName': this.loginUserInfo.userName,
+            'password': this.loginUserInfo.password },
+          headers: {'Content-Type': 'application/json'}
         }).then(function (res) {
-          console.info(res)
+          if (res.data.Status === '2000') {
+          } else {
+            alert(res.data.Message)
+          }
         }).catch(function (err) {
           console.info(err)
         })
       } else {
-        console.info(this.signUpUserInfo.userName)
-        console.info(this.signUpUserInfo.password)
-        console.info(this.signUpUserInfo.enterPassword)
-        console.info(this.signUpUserInfo.phone)
-        console.info(this.signUpUserInfo.email)
-        console.info(this.signUpUserInfo.realName)
-        console.info(this.signUpUserInfo.sex)
-        console.info(this.signUpUserInfo.age)
+        if (this.signUpUserInfo.userName === '' ||
+          this.signUpUserInfo.password === '' ||
+          this.signUpUserInfo.enterPassword === '' ||
+          this.signUpUserInfo.phone === '' ||
+          this.signUpUserInfo.email === '' ||
+          this.signUpUserInfo.realName === '' ||
+          this.signUpUserInfo.sex === '' ||
+          this.signUpUserInfo.age === '') {
+          alert('有未填项')
+        } else {
+          this.request({
+            method: 'post',
+            url: '/Login/SignUp',
+            data: { 'userName': this.signUpUserInfo.userName,
+              'password': this.signUpUserInfo.password,
+              'phone': this.signUpUserInfo.phone,
+              'email': this.signUpUserInfo.email,
+              'realName': this.signUpUserInfo.realName,
+              'sex': this.signUpUserInfo.sex,
+              'age': this.signUpUserInfo.age },
+            headers: {'Content-Type': 'application/json'}
+          }).then((res) => {
+            if (res.data.Status === '2000') {
+              alert('注册成功')
+              this.isLogin = true
+              this.reback = false
+            } else {
+              alert(res.data.Message)
+            }
+          }).catch(function (err) {
+            alert(err.Message)
+          })
+        }
       }
     },
     // 忘记密码点击事件
     changePassword () {
       console.info(this.topIn)
+    },
+    onscroll () {
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+      if (scrollTop > 0) {
+        this.$emit('scroll', scrollTop)
+      }
     }
   },
   mounted () {
     this.initDom()
+    window.addEventListener('scroll', this.onscroll)
   },
   updated () {
     this.initDom()
