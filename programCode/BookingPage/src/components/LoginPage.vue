@@ -1,9 +1,11 @@
 <template>
     <div id="loginPage" class="loginPage" ref="page">
-      <Login class="login" ref="login" v-bind:userInfo="loginUserInfo" :style="{ 'margin-top': topIn}" v-if="isLogin" v-on:forgetPassword="changePassword">
+      <Login class="login" ref="login" v-bind:userInfo="loginUserInfo" :style="{ 'margin-top': topIn}" v-if="pageType==='login'" v-on:forgetPassword="changePassword">
       </Login>
-      <SignUp class="signUp" ref="signUp" v-bind:userInfo="signUpUserInfo" :style="{ 'margin-top': topUp}" v-else>
+      <SignUp class="signUp" ref="signUp" v-bind:userInfo="signUpUserInfo" :style="{ 'margin-top': topUp}" v-else-if="pageType==='signUp'">
       </SignUp>
+      <forgetPW class="forgetPwd" ref="forgetPwd" v-bind:userInfo="changePWDuserInfo" :style="{ 'margin-top': topF}" v-else-if="pageType==='forgetPWD'">
+      </forgetPW>
       <div>
         <div class="inline margin">
           <button class="button" @click="signInClick">{{reback ? '提   交' : '登   录'}}</button>
@@ -18,8 +20,9 @@
 <script>
 import Login from './Login/Login.vue'
 import SignUp from './Login/SignUp.vue'
+import forgetPW from './Login/ForgetPassword.vue'
 export default {
-  components: { Login, SignUp },
+  components: { Login, SignUp, forgetPW },
   name: 'loginPage',
   data () {
     return {
@@ -37,33 +40,40 @@ export default {
         sex: '',
         age: ''
       },
+      changePWDuserInfo: {
+        userName: '',
+        email: ''
+      },
       topIn: '0px',
       topUp: '0px',
+      topF: '0px',
       reback: false,
-      isLogin: true
+      pageType: 'login'
     }
   },
   methods: {
     initDom () {
-      if (this.isLogin) {
+      if (this.pageType === 'login') {
         this.topIn = (this.$refs.page.clientHeight - this.$refs.login.$el.clientHeight) / 2 + 'px'
-      } else {
+      } else if (this.pageType === 'signUp') {
         this.topUp = (this.$refs.page.clientHeight - this.$refs.signUp.$el.clientHeight) / 2 + 'px'
+      } else if (this.pageType === 'forgetPWD') {
+        this.topF = (this.$refs.page.clientHeight - this.$refs.forgetPwd.$el.clientHeight) / 2 + 'px'
       }
     },
     // 注册返回按钮点击事件
     signUpClick () {
       if (!this.reback) {
-        this.isLogin = false
+        this.pageType = 'signUp'
         this.reback = true
       } else {
-        this.isLogin = true
+        this.pageType = 'login'
         this.reback = false
       }
     },
     // 登陆提交按钮点击事件
     signInClick () {
-      if (!this.reback) {
+      if (this.pageType === 'login') {
         this.request({
           method: 'post',
           url: '/Login/Login',
@@ -78,7 +88,7 @@ export default {
         }).catch(function (err) {
           console.info(err)
         })
-      } else {
+      } else if (this.pageType === 'signUp') {
         if (this.signUpUserInfo.userName === '' ||
           this.signUpUserInfo.password === '' ||
           this.signUpUserInfo.enterPassword === '' ||
@@ -103,7 +113,7 @@ export default {
           }).then((res) => {
             if (res.data.Status === '2000') {
               alert('注册成功')
-              this.isLogin = true
+              this.pageType = 'login'
               this.reback = false
             } else {
               alert(res.data.Message)
@@ -112,11 +122,14 @@ export default {
             alert(err.Message)
           })
         }
+      } else if (this.pageType === 'forgetPWD') {
+        console.info(this.changePWDuserInfo.email)
       }
     },
     // 忘记密码点击事件
     changePassword () {
-      console.info(this.topIn)
+      this.pageType = 'forgetPWD'
+      this.reback = true
     },
     onscroll () {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
@@ -154,6 +167,11 @@ export default {
   margin: auto;
 }
 .signUp{
+  width: 100%;
+  text-align: center;
+  margin: auto;
+}
+.forgetPwd{
   width: 100%;
   text-align: center;
   margin: auto;

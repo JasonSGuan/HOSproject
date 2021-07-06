@@ -5,8 +5,7 @@
       <div class="divInput" :style="{ width: divWidth}">
         <input type="text" v-model="object.value" class="input" :style="{ width: inputWidth}" v-on:keyup="inputResponse" v-if="inputType" />
         <select v-model="object.value" v-else-if="isSelect" class="input" :style="{ width: inputWidth}" v-on:change="inputResponse">
-          <option label="男" value="男"></option>
-          <option label="女" value="女"></option>
+          <option v-for="option in object.select" :key="option.value" :value="option.value">{{option.value}}</option>
         </select>
         <input type="password" v-model="object.value" class="input" :style="{ width: inputWidth}" v-on:keyup="inputResponse" v-else />
       </div>

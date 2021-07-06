@@ -20,48 +20,60 @@ export default {
         label: '用户名',
         value: '',
         content: '',
+        select: [],
         vonType: ''
       }, {
         id: 2,
         label: '密码',
         value: '',
         content: '',
+        select: [],
         vonType: ''
       }, {
         id: 3,
         label: '确认密码',
         value: '',
         content: '',
+        select: [],
         vonType: ''
       }, {
         id: 4,
         label: '手机号',
         value: '',
         content: '',
+        select: [],
         vonType: ''
       }, {
         id: 5,
         label: '邮箱',
         value: '',
         content: '',
+        select: [],
         vonType: ''
       }, {
         id: 6,
         label: '姓名',
         value: '',
         content: '',
+        select: [],
         vonType: ''
       }, {
         id: 7,
         label: '性别',
         value: '',
         content: '',
+        select: [{
+          value: '男'
+        }, {
+          value: '女'
+        }],
         vonType: ''
       }, {
         id: 8,
         label: '年龄',
         value: '',
         content: '',
+        select: [],
         vonType: ''
       }],
       inputWidth: '0px',
@@ -80,7 +92,7 @@ export default {
         let reg = /^[a-zA-Z]{1,20}$/
         let pattern = new RegExp(reg)
         if (!pattern.test(value)) {
-          this.userInfoList[0].content = '用户名只能有字母组成，长度不超过20位'
+          this.userInfoList[0].content = '用户名只能由字母组成，长度不超过20位'
         } else {
           this.request({
             method: 'post',

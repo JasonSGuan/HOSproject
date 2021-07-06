@@ -27,9 +27,7 @@ export default {
         value: '',
         content: '忘记密码',
         vonType: 'divClick'
-      }],
-      inputWidth: '0px',
-      divWidth: '0px'
+      }]
     }
   },
   methods: {
@@ -43,6 +41,26 @@ export default {
     inputValue (id, value) {
       if (id === 1) {
         this.userInfo.userName = value
+        let reg = /^[a-zA-Z]{5,20}$/
+        let pattern = new RegExp(reg)
+        if (!pattern.test(value)) {
+          this.userInfoList[0].content = '用户名只能由字母组成，长度不超过5-20位'
+        } else {
+          this.request({
+            method: 'post',
+            url: '/Login/Repeated',
+            data: { 'userName': this.userInfo.userName },
+            headers: {'Content-Type': 'application/json'}
+          }).then((res) => {
+            if (res.data.Status === '2000') {
+              this.userInfoList[0].content = '用户名不存在'
+            } else {
+              this.userInfoList[0].content = ''
+            }
+          }).catch(function (err) {
+            alert(err)
+          })
+        }
       } else {
         this.userInfo.password = value
       }
