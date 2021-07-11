@@ -1,7 +1,7 @@
 <template>
-  <div id="Login">
-    <div class="login">
-      <InputModel v-for="user in userInfoList" v-bind:key="user.id" v-bind:object="user" v-on:divResponse="changePassword" v-on:inputResponse="inputValue">
+  <div id='forgetPW'>
+    <div class="forgetPW">
+      <InputModel v-for="user in userInfoList" v-bind:key="user.id" v-bind:object="user" v-on:inputResponse="inputValue">
       </InputModel>
     </div>
   </div>
@@ -11,8 +11,8 @@
 import InputModel from './InputModel.vue'
 export default {
   props: ['userInfo'],
+  name: 'forgetPW',
   components: { InputModel },
-  name: 'Login',
   data () {
     return {
       userInfoList: [{
@@ -23,21 +23,14 @@ export default {
         vonType: ''
       }, {
         id: 2,
-        label: '密码',
+        label: '邮箱',
         value: '',
-        content: '忘记密码',
-        vonType: 'divClick'
+        content: '',
+        vonType: ''
       }]
     }
   },
   methods: {
-    initDom () {
-      this.userInfoList[0].value = this.userInfo.userName
-      this.userInfoList[1].value = this.userInfo.password
-    },
-    changePassword () {
-      this.$emit('forgetPassword')
-    },
     inputValue (id, value) {
       if (id === 1) {
         this.userInfo.userName = value
@@ -58,23 +51,27 @@ export default {
               this.userInfoList[0].content = ''
             }
           }).catch(function (err) {
-            alert(err)
+            console.info(err)
+            alert('请求失败')
           })
         }
       } else {
-        this.userInfo.password = value
+        this.userInfo.email = value
+        let reg = /^([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/
+        let pattern = new RegExp(reg)
+        if (!pattern.test(value)) {
+          this.userInfoList[1].content = '邮箱格式不合法'
+        } else {
+          this.userInfoList[1].content = ''
+        }
       }
     }
-  },
-  mounted () {
-    this.initDom()
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.login{
+.forgetPW{
   width: 100%;
   text-align: center;
   margin: auto;

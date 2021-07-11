@@ -9,6 +9,8 @@ Vue.config.productionTip = false
 // 全局axios
 Vue.prototype.request = axios
 axios.defaults.baseURL = 'http://www.lightor.vip/BookingApi/api'
+// 路由
+Vue.prototype.rou = router
 
 /* eslint-disable no-new */
 new Vue({

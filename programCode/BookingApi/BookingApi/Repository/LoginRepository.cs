@@ -29,7 +29,7 @@ namespace BookingApi.Repository
             string password = user.password;
             string strSql = "";
             // 根据用户名和密码查询用户表是否有对应数据
-            strSql = $@"SELECT COUNT(1) FROM dbo.users WHERE userName = @userName AND password = @password";
+            strSql = $@"SELECT id FROM dbo.users WHERE userName = @userName AND password = @password";
             // 参数化查询参数对象
             SqlParameter[] sqlParameters = new SqlParameter[2];
             sqlParameters[0] = new SqlParameter("@userName", userName);
@@ -40,16 +40,9 @@ namespace BookingApi.Repository
             ApiResultModel result = new ApiResultModel();
             if (dt.Rows.Count > 0)
             {
-                if (dt.Rows[0][0].ToString() == "0")
-                {
-                    result.Status = "5000";
-                    result.Message = "用户名或密码错误";
-                }
-                else
-                {
-                    result.Status = "2000";
-                    result.Message = "登陆成功";
-                }
+                result.Status = "2000";
+                result.Data = "\"id\":\"" + dt.Rows[0][0].ToString() + "\"";
+                result.Message = "登陆成功";
             }
             else
             {

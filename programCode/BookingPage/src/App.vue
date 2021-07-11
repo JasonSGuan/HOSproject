@@ -3,13 +3,16 @@
     <div class="background" :style="{ top: topBg}">
       <img :src="imgUrl" class="bgImg" />
     </div>
-    <router-view class="other" v-on:scroll="fixedBgImg"/>
+    <MainPage class="other" v-on:scroll="fixedBgImg">
+    </MainPage>
   </div>
 </template>
 
 <script>
+import MainPage from './components/MainPage.vue'
 export default {
   name: 'App',
+  components: { MainPage },
   data () {
     return {
       imgUrl: require('./assets/卡通风.png'),

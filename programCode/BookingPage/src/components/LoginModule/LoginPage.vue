@@ -1,5 +1,6 @@
 <template>
-    <div id="loginPage" class="loginPage" ref="page">
+    <div id="loginPage" ref="page">
+      <div class="back"></div>
       <Login class="login" ref="login" v-bind:userInfo="loginUserInfo" :style="{ 'margin-top': topIn}" v-if="pageType==='login'" v-on:forgetPassword="changePassword">
       </Login>
       <SignUp class="signUp" ref="signUp" v-bind:userInfo="signUpUserInfo" :style="{ 'margin-top': topUp}" v-else-if="pageType==='signUp'">
@@ -18,10 +19,11 @@
 </template>
 
 <script>
-import Login from './Login/Login.vue'
-import SignUp from './Login/SignUp.vue'
-import forgetPW from './Login/ForgetPassword.vue'
+import Login from './Login.vue'
+import SignUp from './SignUp.vue'
+import forgetPW from './ForgetPassword.vue'
 export default {
+  props: ['loginUser'],
   components: { Login, SignUp, forgetPW },
   name: 'loginPage',
   data () {
@@ -80,8 +82,10 @@ export default {
           data: { 'userName': this.loginUserInfo.userName,
             'password': this.loginUserInfo.password },
           headers: {'Content-Type': 'application/json'}
-        }).then(function (res) {
+        }).then((res) => {
           if (res.data.Status === '2000') {
+            this.loginUser.id = res.data.Data.id
+            this.rou.push('./Main')
           } else {
             alert(res.data.Message)
           }
@@ -119,7 +123,8 @@ export default {
               alert(res.data.Message)
             }
           }).catch(function (err) {
-            alert(err.Message)
+            console.info(err)
+            alert('请求失败')
           })
         }
       } else if (this.pageType === 'forgetPWD') {
@@ -130,6 +135,24 @@ export default {
     changePassword () {
       this.pageType = 'forgetPWD'
       this.reback = true
+      this.request({
+        method: 'post',
+        url: '/Login/SignUp',
+        data: { 'userName': this.signUpUserInfo.userName,
+          'email': this.signUpUserInfo.email },
+        headers: {'Content-Type': 'application/json'}
+      }).then((res) => {
+        if (res.data.Status === '2000') {
+          alert('密码重置成功，新密码已发送至邮箱')
+          this.pageType = 'login'
+          this.reback = false
+        } else {
+          alert(res.data.Message)
+        }
+      }).catch(function (err) {
+        console.info(err)
+        alert('请求失败')
+      })
     },
     onscroll () {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
@@ -150,7 +173,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.loginPage{
+#loginPage{
   width: 100%;
   height: 100%;
 }
@@ -215,5 +238,14 @@ export default {
 .a{
   font-size: 12px;
   width: 20px;
+}
+.back {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  z-index: -1;
+  top: 10px;
+  left: 10px;
+  background-image: '~@/assets/返回.png';
 }
 </style>

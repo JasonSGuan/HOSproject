@@ -107,6 +107,7 @@ export default {
             }
           }).catch(function (err) {
             console.info(err)
+            console.info('请求失败')
           })
         }
       } else if (id === 2) {

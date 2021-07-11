@@ -1,5 +1,5 @@
 <template>
-  <div id="InputModel" class="model">
+  <div id="InputModel">
     <div class="divModel" ref="divPLogin">
       <div class="label" ref="divU">{{object.label}}:</div>
       <div class="divInput" :style="{ width: divWidth}">
@@ -58,7 +58,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.model{
+#InputModel{
   width: 100%;
   text-align: center;
   margin: auto;
