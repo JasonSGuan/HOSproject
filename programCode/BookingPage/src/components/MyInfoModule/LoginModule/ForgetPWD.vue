@@ -1,6 +1,6 @@
 <template>
-  <div id='forgetPW'>
-    <div class="forgetPW">
+  <div id='ForgetPWD'>
+    <div class="ForgetPW">
       <InputModel v-for="user in userInfoList" v-bind:key="user.id" v-bind:object="user" v-on:inputResponse="inputValue">
       </InputModel>
     </div>
@@ -8,10 +8,10 @@
 </template>
 
 <script>
-import InputModel from './InputModel.vue'
+import InputModel from '../../InputModel.vue'
 export default {
   props: ['userInfo'],
-  name: 'forgetPW',
+  name: 'ForgetPWD',
   components: { InputModel },
   data () {
     return {
@@ -71,7 +71,7 @@ export default {
 </script>
 
 <style scoped>
-.forgetPW{
+.ForgetPW {
   width: 100%;
   text-align: center;
   margin: auto;

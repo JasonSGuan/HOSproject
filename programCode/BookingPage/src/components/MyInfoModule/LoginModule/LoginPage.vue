@@ -1,31 +1,32 @@
 <template>
-    <div id="loginPage" ref="page">
-      <div class="back"></div>
-      <Login class="login" ref="login" v-bind:userInfo="loginUserInfo" :style="{ 'margin-top': topIn}" v-if="pageType==='login'" v-on:forgetPassword="changePassword">
-      </Login>
-      <SignUp class="signUp" ref="signUp" v-bind:userInfo="signUpUserInfo" :style="{ 'margin-top': topUp}" v-else-if="pageType==='signUp'">
-      </SignUp>
-      <forgetPW class="forgetPwd" ref="forgetPwd" v-bind:userInfo="changePWDuserInfo" :style="{ 'margin-top': topF}" v-else-if="pageType==='forgetPWD'">
-      </forgetPW>
-      <div>
-        <div class="inline margin">
-          <button class="button" @click="signInClick">{{reback ? '提   交' : '登   录'}}</button>
-        </div>
-        <div class="inline margin">
-          <button class="button" @click="signUpClick" >{{reback ? '返   回' : '注   册'}}</button>
-        </div>
+  <div id="LoginPage" ref="page">
+<!--     <div class="back" @click="backClick" :style="{ 'top': top}">
+      <img src="~@/assets/返回.png" class="img" />
+    </div> -->
+    <Login class="login" ref="login" v-bind:userInfo="loginUserInfo" :style="{ 'margin-top': topIn}" v-if="pageType==='login'" v-on:forgetPassword="changePassword">
+    </Login>
+    <SignUp class="signUp" ref="signUp" v-bind:userInfo="signUpUserInfo" :style="{ 'margin-top': topUp}" v-else-if="pageType==='signUp'">
+    </SignUp>
+    <ForgetPWD class="forgetPwd" ref="forgetPwd" v-bind:userInfo="changePWDuserInfo" :style="{ 'margin-top': topF}" v-else-if="pageType==='forgetPWD'">
+    </ForgetPWD>
+    <div>
+      <div class="inline margin">
+        <button class="button" @click="signInClick">{{reback ? '提   交' : '登   录'}}</button>
+      </div>
+      <div class="inline margin">
+        <button class="button" @click="signUpClick" >{{reback ? '返   回' : '注   册'}}</button>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
 import Login from './Login.vue'
 import SignUp from './SignUp.vue'
-import forgetPW from './ForgetPassword.vue'
+import ForgetPWD from './ForgetPWD.vue'
 export default {
-  props: ['loginUser'],
-  components: { Login, SignUp, forgetPW },
-  name: 'loginPage',
+  components: { Login, SignUp, ForgetPWD },
+  name: 'LoginPage',
   data () {
     return {
       loginUserInfo: {
@@ -49,6 +50,7 @@ export default {
       topIn: '0px',
       topUp: '0px',
       topF: '0px',
+      top: '5px',
       reback: false,
       pageType: 'login'
     }
@@ -68,9 +70,11 @@ export default {
       if (!this.reback) {
         this.pageType = 'signUp'
         this.reback = true
+        this.$emit("ChangeNum", "5")
       } else {
         this.pageType = 'login'
         this.reback = false
+        this.$emit("ChangeNum", "3")
       }
     },
     // 登陆提交按钮点击事件
@@ -85,7 +89,6 @@ export default {
         }).then((res) => {
           if (res.data.Status === '2000') {
             this.loginUser.id = res.data.Data.id
-            this.rou.push('./Main')
           } else {
             alert(res.data.Message)
           }
@@ -119,6 +122,7 @@ export default {
               alert('注册成功')
               this.pageType = 'login'
               this.reback = false
+              this.$emit("ChangeNum", "3")
             } else {
               alert(res.data.Message)
             }
@@ -128,36 +132,37 @@ export default {
           })
         }
       } else if (this.pageType === 'forgetPWD') {
-        console.info(this.changePWDuserInfo.email)
+        this.request({
+          method: 'post',
+          url: '/Login/SignUp',
+          data: { 'userName': this.signUpUserInfo.userName,
+            'email': this.signUpUserInfo.email },
+          headers: {'Content-Type': 'application/json'}
+        }).then((res) => {
+          if (res.data.Status === '2000') {
+            alert('密码重置成功，新密码已发送至邮箱')
+            this.pageType = 'login'
+            this.reback = false
+            this.$emit("ChangeNum", "3")
+          } else {
+            alert(res.data.Message)
+          }
+        }).catch(function (err) {
+          console.info(err)
+          alert('请求失败')
+        })
       }
     },
     // 忘记密码点击事件
     changePassword () {
       this.pageType = 'forgetPWD'
       this.reback = true
-      this.request({
-        method: 'post',
-        url: '/Login/SignUp',
-        data: { 'userName': this.signUpUserInfo.userName,
-          'email': this.signUpUserInfo.email },
-        headers: {'Content-Type': 'application/json'}
-      }).then((res) => {
-        if (res.data.Status === '2000') {
-          alert('密码重置成功，新密码已发送至邮箱')
-          this.pageType = 'login'
-          this.reback = false
-        } else {
-          alert(res.data.Message)
-        }
-      }).catch(function (err) {
-        console.info(err)
-        alert('请求失败')
-      })
+      this.$emit("ChangeNum", "6")
     },
     onscroll () {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
       if (scrollTop > 0) {
-        this.$emit('scroll', scrollTop)
+        this.top = (scrollTop + 10) + 'px'
       }
     }
   },
@@ -173,9 +178,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#loginPage{
+#LoginPage{
   width: 100%;
-  height: 100%;
 }
 .margin{
   margin: auto 10px;
@@ -240,12 +244,14 @@ export default {
   width: 20px;
 }
 .back {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   position: absolute;
-  z-index: -1;
-  top: 10px;
-  left: 10px;
-  background-image: '~@/assets/返回.png';
+  z-index: 1;
+  left: 5px;
+}
+.img {
+  width: 20px;
+  height: 20px;
 }
 </style>

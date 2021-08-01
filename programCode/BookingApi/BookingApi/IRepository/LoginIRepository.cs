@@ -29,5 +29,19 @@ namespace BookingApi.IRepository
         /// <param name="useer"></param>
         /// <returns></returns>
         ApiResultModel IsRepeatedUserName(UserInfoModel user);
+
+        /// <summary>
+        /// 重置密码
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        ApiResultModel ResetPassword(UserInfoModel user);
+
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        ApiResultModel ChangePassword(UserInfoModel user);
     }
 }

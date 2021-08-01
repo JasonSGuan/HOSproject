@@ -38,5 +38,9 @@ namespace BookingApi.Models
         /// 年龄
         /// </summary>
         public string age;
+        /// <summary>
+        /// 密码
+        /// </summary>
+        public string newPassword;
     }
 }

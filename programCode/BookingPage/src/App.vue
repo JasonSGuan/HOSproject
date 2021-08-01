@@ -15,7 +15,7 @@ export default {
   components: { MainPage },
   data () {
     return {
-      imgUrl: require('./assets/卡通风.png'),
+      imgUrl: require('./assets/淡雅水墨渐变简约古风.png'),
       topBg: '0px'
     }
   },

@@ -1,34 +1,39 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import LoginPage from '@/components/LoginModule/LoginPage'
-import Login from '@/components/LoginModule/Login'
-import SignUp from '@/components/LoginModule/SignUp'
-import InputModel from '@/components/LoginModule/InputModel'
+import LoginPage from '@/components/MyInfoModule/LoginModule/LoginPage'
+import Login from '@/components/MyInfoModule/LoginModule/Login'
+import SignUp from '@/components/MyInfoModule/LoginModule/SignUp'
+import ForgetPWD from '@/components/MyInfoModule/LoginModule/ForgetPWD'
+import InputModel from '@/components/InputModel'
 import Record from '@/components/RecordModule/Record'
 import MainPage from '@/components/MainPage'
-import MainModule from '@/components/MainModule/MainModule'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/LoginModule',
+      path: '/MyInfoModule/LoginModule',
       name: 'Login',
       component: Login
     },
     {
-      path: '/LoginModule',
+      path: '/MyInfoModule/LoginModule',
       name: 'SignUp',
       component: SignUp
     },
     {
-      path: '/LoginModule',
+      path: '/MyInfoModule/LoginModule',
+      name: 'ForgetPWD',
+      component: ForgetPWD
+    },
+    {
+      path: '/MyInfoModule/LoginModule',
       name: 'LoginPage',
       component: LoginPage
     },
     {
-      path: '/LoginModule',
+      path: '/',
       name: 'InputModel',
       component: InputModel
     },
@@ -41,11 +46,6 @@ export default new Router({
       path: '/',
       name: 'MainPage',
       component: MainPage
-    },
-    {
-      path: '/MainModule',
-      name: 'MainModule',
-      component: MainModule
     }
   ]
 })

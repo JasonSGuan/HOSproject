@@ -63,5 +63,29 @@ namespace BookingApi.Controllers
         {
             return login.IsRepeatedUserName(user);
         }
+
+        /// <summary>
+        /// 重置密码
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        [Route("ResetPWD")]
+        [HttpPost]
+        public ApiResultModel ResetPassword(UserInfoModel user)
+        {
+            return login.ResetPassword(user);
+        }
+
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        [Route("ChangePWD")]
+        [HttpPost]
+        public ApiResultModel ChangePassword(UserInfoModel user)
+        {
+            return login.ChangePassword(user);
+        }
     }
 }

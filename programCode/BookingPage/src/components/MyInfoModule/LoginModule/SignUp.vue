@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import InputModel from './InputModel.vue'
+import InputModel from '../../InputModel.vue'
 export default {
   props: ['userInfo'],
   components: { InputModel },
@@ -89,7 +89,7 @@ export default {
       if (id === 1) {
         // 用户名
         this.userInfo.userName = value
-        let reg = /^[a-zA-Z]{1,20}$/
+        let reg = /^[a-zA-Z]{4,20}$/
         let pattern = new RegExp(reg)
         if (!pattern.test(value)) {
           this.userInfoList[0].content = '用户名只能由字母组成，长度不超过20位'
@@ -119,7 +119,7 @@ export default {
           this.userInfoList[1].content = '密码不能为空'
         } else {
           if (!pattern.test(value)) {
-            this.userInfoList[1].content = '密码必须由字符、数字、下划线组成6-18位'
+            this.userInfoList[1].content = '密码必须由大写字母、小写字母、数字组成6-18位'
           } else {
             this.userInfoList[1].content = ''
           }

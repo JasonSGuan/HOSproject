@@ -24,6 +24,7 @@ namespace BookingApi
             IUnityContainer unityContainer = new UnityContainer();
 
             unityContainer.RegisterType<LoginIRepository, LoginRepository>();
+            unityContainer.RegisterType<RecordIRepository, RecordRepository>();
             GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerActivator), new Filters.UnityHttpControllerActivator(unityContainer));
         }
     }
