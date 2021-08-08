@@ -34,7 +34,7 @@ namespace BookingApi.Repository
             // 参数化查询参数对象
             SqlParameter[] sqlParameters = new SqlParameter[2];
             sqlParameters[0] = new SqlParameter("@userName", userName);
-            sqlParameters[1] = new SqlParameter("@password", AESEncrypt.Encrypt(password));
+            sqlParameters[1] = new SqlParameter("@password", DEsecretHelper.Encrypt(password));
             // 执行sql语句
             DataTable dt = SqlHelper.execSqlToTable(strSql, sqlParameters);
             // 返回结果
@@ -115,7 +115,7 @@ namespace BookingApi.Repository
             // 参数化查询对象
             sqlParameters = new SqlParameter[7];
             sqlParameters[0] = new SqlParameter("@userName", userName);
-            sqlParameters[1] = new SqlParameter("@password", AESEncrypt.Encrypt(password));
+            sqlParameters[1] = new SqlParameter("@password", DEsecretHelper.Encrypt(password));
             sqlParameters[2] = new SqlParameter("@realName", realName);
             sqlParameters[3] = new SqlParameter("@sex", sex);
             sqlParameters[4] = new SqlParameter("@age", age);
@@ -203,7 +203,7 @@ namespace BookingApi.Repository
             // 更新密码
             strSql = "update users set password = @password where userName = @userName";
             sqlParameter[0] = new SqlParameter("@userName", userName);
-            sqlParameter[0] = new SqlParameter("@password", password);
+            sqlParameter[0] = new SqlParameter("@password", DEsecretHelper.Encrypt(password));
             SqlHelper.execNoneSelect(strSql, sqlParameter);
             // 发送邮件
             ManagerEmail.EMail.SendEmail(email, "", "", "重置密码", "您的新密码是：" + password + "请妥善保管，并重新登陆后修改密码！", "", "系统", EmailConfig.email, EmailConfig.password, EmailConfig.emailSmtp, EmailConfig.port, "", true);
@@ -230,7 +230,7 @@ namespace BookingApi.Repository
             strSql = "select count(1) from users where userName = @userName and password = @password";
             SqlParameter[] sqlParameter = new SqlParameter[2];
             sqlParameter[0] = new SqlParameter("@userName", userName);
-            sqlParameter[1] = new SqlParameter("@password", AESEncrypt.Encrypt(password));
+            sqlParameter[1] = new SqlParameter("@password", DEsecretHelper.Encrypt(password));
             DataTable dtCount = SqlHelper.execSqlToTable(strSql);
             if (dtCount.Rows[0][0].ToString() == "0")
             {
@@ -244,7 +244,7 @@ namespace BookingApi.Repository
             // 更新密码
             strSql = "update users set password = @password where userName = @userName";
             sqlParameter[0] = new SqlParameter("@userName", userName);
-            sqlParameter[0] = new SqlParameter("@password", AESEncrypt.Encrypt(newPassword));
+            sqlParameter[0] = new SqlParameter("@password", DEsecretHelper.Encrypt(newPassword));
             SqlHelper.execNoneSelect(strSql, sqlParameter);
             return new ApiResultModel()
             {

@@ -7,9 +7,12 @@ using System.Web.Http;
 using BookingApi.Models;
 using BookingApi.IRepository;
 using BookingApi.Repository;
+using BookingApi.Filters;
 
 namespace BookingApi.Controllers
 {
+    [RoutePrefix("api/Login")]
+    [LogAction]
     public class RecordController : ApiController
     {
         public RecordIRepository record { get; private set; }
@@ -18,9 +21,25 @@ namespace BookingApi.Controllers
             this.record = record;
         }
 
+        [Route("GetRecordList")]
+        [HttpGet]
         public ApiResultModel GetRecordList(RecordInfoModel recordInfo)
         {
             return record.GetRecordList(recordInfo);
+        }
+
+        [Route("GetMonthList")]
+        [HttpGet]
+        public ApiResultModel GetMonthList(RecordInfoModel recordInfo)
+        {
+            return record.GetMonthList(recordInfo);
+        }
+
+        [Route("AddRecord")]
+        [HttpPost]
+        public ApiResultModel AddRecord(RecordInfoModel recordInfo)
+        {
+            return record.AddRecord(recordInfo);
         }
     }
 }

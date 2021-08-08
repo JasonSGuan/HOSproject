@@ -8,8 +8,12 @@ namespace BookingApi.Models
     public class RecordInfoModel
     {
         public string userName;
-        public string month;
-        public string year;
-        public string type;
+        public string yearMonth;
+        public string account;
+        public string isInOrOut;
+        public string ioSource;
+        public string remark;
+        public string amount;
+        public string happenTime;
     }
 }
